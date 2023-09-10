@@ -1,0 +1,27 @@
+# Defining Function
+def iterative_unknown(x,y):
+    count = 1
+    if x == y:
+       return 1
+    if x < y:
+       for x in range(x,y):
+           print(x+y)
+           count = count * 2
+       return count
+    if x > y:
+       for x in range(x,y,-1):
+           print(x+y)
+           count = count /2
+    return int(count)
+
+# Implementing Function
+x = 1
+y = 1
+while x!= 0 and y != 0:
+    x = int(input("Enter x : "))
+    y = int(input("Enter y : "))
+    if x != 0 and y != 0:
+        a = iterative_unknown(x,y)
+        print(a)
+
+# The End
