@@ -18,10 +18,12 @@ def iterative_unknown(x,y):
 x = 1
 y = 1
 while x!= 0 and y != 0:
-    x = int(input("Enter x : "))
-    y = int(input("Enter y : "))
+    x = input("Enter x : ")
+    y = input("Enter y : ")
     if x != 0 and y != 0:
-        print("Iterative_Function("+ x + "," + y ")"
+        print("Iterative_function(" + x + "," + y + ")")
+        x = int(x)
+        y = int(y)
         a = iterative_unknown(x,y)
         print(a)
 
