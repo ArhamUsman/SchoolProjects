@@ -1,0 +1,53 @@
+# Bubble Sort Procedure
+def Bubble_Sort_Inefficient(Array):
+    swaps = None
+    first = 0
+    last = len(Array) - 1
+    while swaps != False or last == 1 :
+        swaps = False
+        for count in range(first, last ):
+            if Array[count] > Array[count + 1]:
+                temp = Array[count]
+                Array[count] =  Array[count + 1]
+                Array[count + 1] = temp
+                swaps = True
+        last -= 1
+
+# Check whether to sort integer or string
+print("OPTION 1 : Sort Array for String")
+print("OPTION 2 : Sort Array for Integer")
+print("")
+choice = input("Enter Option Number: ")
+while choice != "1" and choice != "2":
+    choice = input("Enter a valid option number: ")
+
+# Input the array
+print("")
+print("DATA ENTRY")
+print("Enter 'done' when complete")
+print("")
+Array = []
+if choice == "1":
+    x = input("Enter a string: ")
+    while x != "done":
+        Array.append(x)
+        x = input("Enter a string: ")
+else:
+    x = input("Enter a integer: ")
+    while x != "done":
+        try:
+            x = int(x)
+            Array.append(x)
+        except:
+            print("ERROR")
+        x = input("Enter a integer: ")
+
+
+# Produce Output
+print("")
+print("Array before sorting: ")
+print(Array)
+Bubble_Sort_Inefficient(Array)
+print("")
+print("Array after sorting: ")
+print(Array)
