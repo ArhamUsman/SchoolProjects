@@ -1,5 +1,6 @@
 # Bubble Sort Procedure
-def Bubble_Sort_Inefficient(Array):
+# Bubble Sort Procedure
+def Bubble_Sort_Efficient(Array):
     swaps = None
     first = 0
     last = len(Array) - 1
@@ -13,41 +14,51 @@ def Bubble_Sort_Inefficient(Array):
                 swaps = True
         last -= 1
 
+
 # Check whether to sort integer or string
-print("OPTION 1 : Sort Array for String")
-print("OPTION 2 : Sort Array for Integer")
-print("")
-choice = input("Enter Option Number: ")
-while choice != "1" and choice != "2":
-    choice = input("Enter a valid option number: ")
-
-# Input the array
-print("")
-print("DATA ENTRY")
-print("Enter 'done' when complete")
-print("")
-Array = []
-if choice == "1":
-    x = input("Enter a string: ")
-    while x != "done":
-        Array.append(x)
+def Array_Input(Array):
+    print("OPTION 1 : Sort Array for String")
+    print("OPTION 2 : Sort Array for Integer")
+    print("")
+    choice = input("Enter Option Number: ")
+    while choice != "1" and choice != "2":
+        choice = input("Enter a valid option number: ")
+    print("")
+    print("DATA ENTRY")
+    print("Enter 'done' when complete")
+    print("")
+    if choice == "1":
         x = input("Enter a string: ")
-else:
-    x = input("Enter a integer: ")
-    while x != "done":
-        try:
-            x = int(x)
+        while x != "done":
             Array.append(x)
-        except:
-            print("ERROR")
+            x = input("Enter a string: ")
+    else:
         x = input("Enter a integer: ")
-
+        while x != "done":
+            try:
+                x = int(x)
+                Array.append(x)
+            except:
+                print("ERROR")
+            x = input("Enter a integer: ")
 
 # Produce Output
+def Array_Output(Array):
+    for i in range(len(Array)):
+        if i == len(Array) - 1 :
+            print("," , Array[i], ")")
+        elif i == 0:
+            print("(", Array[i], end="")
+        else:
+            print(",", Array[i], end="")
+
+
+# Menu
+Array1 = []
+Array_Input(Array1)
 print("")
 print("Array before sorting: ")
-print(Array)
-Bubble_Sort_Inefficient(Array)
-print("")
+Array_Output(Array1)
+Bubble_Sort_Efficient(Array1)
 print("Array after sorting: ")
-print(Array)
+Array_Output(Array1)
