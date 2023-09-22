@@ -1,4 +1,4 @@
-# Bubble Sort Procedure
+# Insertion Sort Procedure
 def Insertion_Sort_ZAK(Array):
     s_pointer = 0
     e_pointer = 1
