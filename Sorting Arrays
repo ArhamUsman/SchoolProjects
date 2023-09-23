@@ -1,0 +1,88 @@
+# Insertion Sort Standard
+def Insertion_Sort_Standard(Array):
+    # e_pointer, s_pointer, value
+    for e_pointer in range(1, len(Array)):
+        s_pointer = e_pointer - 1
+        value = Array[e_pointer]
+        while s_pointer >= 0 and Array[s_pointer] > value:
+            Array[s_pointer + 1] = Array[s_pointer]
+            s_pointer -= 1
+        Array[s_pointer + 1] = value
+
+
+# Insertion Sort ZAK
+def Insertion_Sort_ZAK(Array):
+    # e_pointer, s_pointer, r_pointer, value
+    for e_pointer in range(1, len(Array)):
+        for s_pointer in range(0, e_pointer):
+            if Array[e_pointer] < Array[s_pointer]:
+                value = Array[e_pointer]
+                for r_pointer in range(e_pointer, s_pointer, -1):
+                    Array[r_pointer] = Array[r_pointer - 1]
+                Array[s_pointer] = value
+                break
+
+
+# Bubble Sort Inefficient
+def Bubble_Sort_Inefficient(Array):
+    # i, j, value
+    for i in range(0, len(Array)):
+        for j in range(i + 1, len(Array)):
+            if Array[i] > Array[j]:
+                value = Array[i]
+                Array[i] = Array[j]
+                Array[j] = value
+
+
+# Bubble Sort Efficient
+def Bubble_Sort_Efficient(Array):
+    # swaps, first, last, count, value
+    swaps = True
+    first = 0
+    last = len(Array) - 1
+    while swaps != False and last > 0:
+        for count in range(first, last):
+            if Array[count] > Array[count + 1]:
+                value = Array[count]
+                Array[count] = Array[count + 1]
+                Array[count + 1] = value
+                swaps = True
+        last = last - 1
+
+
+# Menu
+print("OPTION 1: Insertion Sort(Standard Method)")
+print("OPTION 2: Insertion Sort(ZAK Method)")
+print("OPTION 3: Bubble Sort(Efficient Method)")
+print("OPTION 4: Bubble Sort(Inefficient Method)")
+option = input("Enter option: ")
+while option == '1' or option == '2' or option == '3' or option == '4':
+    Array1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    Array2 = ['a', 's', 'd', 'f', 'z', 'x', 'c']
+    print("Array 1 before sorting: ", Array1)
+    print("Array 2 before sorting: ", Array2)
+    print("______________________________________________________________")
+    if option == '1':
+        Insertion_Sort_Standard(Array1)
+        Insertion_Sort_Standard(Array2)
+        print("Insertion Sort(Standard Method)")
+    elif option == '2':
+        Insertion_Sort_ZAK(Array1)
+        Insertion_Sort_ZAK(Array2)
+        print("Insertion Sort(ZAK Method)")
+    elif option == '3':
+        Bubble_Sort_Efficient(Array1)
+        Bubble_Sort_Efficient(Array2)
+        print("Bubble Sort(Efficient Method)")
+    elif option == '4':
+        Bubble_Sort_Inefficient(Array1)
+        Bubble_Sort_Inefficient(Array2)
+        print("Bubble Sort(Inefficient Method)")
+    print("Array 1 after sorting: ", Array1)
+    print("Array 2 after sorting: ", Array2)
+    input("______________________________________________________________")
+    print("OPTION 1: Insertion Sort(Standard Method)")
+    print("OPTION 2: Insertion Sort(ZAK Method)")
+    print("OPTION 3: Bubble Sort(Efficient Method)")
+    print("OPTION 4: Bubble Sort(Inefficient Method)")
+    option = input("Enter option: ")
