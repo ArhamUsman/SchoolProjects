@@ -1,0 +1,25 @@
+def Array_Input(Array):
+    print("OPTION 1 : Sort Array for String")
+    print("OPTION 2 : Sort Array for Integer")
+    print("")
+    choice = input("Enter Option Number: ")
+    while choice != "1" and choice != "2":
+        choice = input("Enter a valid option number: ")
+    print("")
+    print("DATA ENTRY")
+    print("Enter 'done' when complete")
+    print("")
+    if choice == "1":
+        x = input("Enter a string: ")
+        while x != "done":
+            Array.append(x)
+            x = input("Enter a string: ")
+    else:
+        x = input("Enter a integer: ")
+        while x != "done":
+            try:
+                x = int(x)
+                Array.append(x)
+            except:
+                print("ERROR")
+            x = input("Enter a integer: ")
