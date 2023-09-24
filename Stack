@@ -1,0 +1,78 @@
+# Global
+sample = [None for i in range(6)]
+null_pointer = -1
+head_pointer = null_pointer
+
+
+# Initialising stack
+def init_stack(Array):
+    global head_pointer
+    for i in range(len(Array)):
+        Array[i] = None
+    head_pointer = null_pointer
+    print("Initialised Successfully")
+
+
+# Push
+def push(Array, Value):
+    global head_pointer
+    head_pointer += 1
+    if head_pointer >= len(Array):
+        print("ERROR! Stack is full")
+    else:
+        Array[head_pointer] = Value
+        print("Pushed Successfully")
+
+
+# Pop
+def pop(Array):
+    global head_pointer, null_pointer
+    if head_pointer == null_pointer:
+        print("ERROR! Stack is empty")
+        return -1
+    else:
+        head_pointer -= 1
+        print("Popped Successfully")
+        return Array[head_pointer + 1]
+
+
+# Display
+def display(array):
+    if head_pointer == null_pointer:
+        print("Stack is empty")
+    else:
+        for i in range(len(array)-1, null_pointer, -1):
+            if i == head_pointer:
+                print(array[i], "\t <-- Head")
+            else:
+                print(array[i])
+
+
+# Menu
+status = False
+while not status:
+    print("Choice 1: Initialise Stack")
+    print("Choice 2: Push an item")
+    print("Choice 3: Pop an item")
+    print("Choice 4: Display the stack")
+    print("Choice 5: Terminate")
+    print("")
+    choice = input("Enter choice number: ")
+    if choice == '1':
+        init_stack(sample)
+    elif choice == '2':
+        print("")
+        i = input("Enter data to be pushed: ")
+        push(sample, i)
+    elif choice == '3':
+        print(pop(sample))
+        input("")
+    elif choice == '4':
+        display(sample)
+        input()
+    elif choice == '5':
+        break
+    else:
+        print("_______________")
+        continue
+    print("_______________")
