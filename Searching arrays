@@ -1,0 +1,34 @@
+# For binary searching, array need to be sorted first
+
+def binary_search_iterative(array, value):
+    s_pointer = 0
+    e_pointer = len(array) - 1
+    found = False
+    while s_pointer <= e_pointer:
+        middle = (s_pointer + e_pointer) //2
+        if array[middle] == value:
+            return middle
+        elif array[middle] < value:
+            s_pointer = middle + 1
+        elif array[middle] > value:
+            e_pointer = middle - 1
+    return -1
+
+
+def binary_search_recursive(array, s_pointer, e_pointer, value):
+    if s_pointer > e_pointer:
+        return -1
+    middle = (s_pointer + e_pointer) // 2
+    if array[middle] == value:
+        return middle
+    if array[middle] < value:
+        return binary_search_recursive(array, middle + 1, e_pointer, value)
+    if array[middle] > value:
+        return binary_search_recursive(array, s_pointer, middle - 1, value)
+
+
+def linear_search(array, value):
+    for index in range(0, len(array)):
+        if array[index] == value:
+            return index
+    return -1
