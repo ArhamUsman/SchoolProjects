@@ -1,0 +1,131 @@
+class Bt:
+    def __init__(self):
+        self.left_child = -1
+        self.data = None
+        self.right_child = -1
+
+
+binary_tree = [Bt() for i in range(7)]
+
+
+def init():
+    for index in range(6):
+        binary_tree[index].left_child = -1
+        binary_tree[index].data = None
+        binary_tree[index].right_child = -1
+    print("Binary tree initialised successfully")
+
+
+def add(data):
+    for index in range(6):
+        if binary_tree[index].data is None:  # insert in the first available empty space
+            binary_tree[index].data = data
+            print("Data added successfully")
+            # Find the suitable mother
+            mother = 0
+            while mother < 6:  # Used because somehow cannot update "for" variable
+                # for left child
+                if binary_tree[index].data < binary_tree[mother].data:
+                    if binary_tree[mother].left_child == -1:  # Check if mother has no child
+                        binary_tree[mother].left_child = index
+                        break
+                    else:
+                        mother = binary_tree[mother].left_child  # Child of mother is mother now
+                # for right child
+                if binary_tree[index].data > binary_tree[mother].data:
+                    if binary_tree[mother].right_child == -1:  # Check if mother has no child
+                        binary_tree[mother].right_child = index
+                        break
+                    else:
+                        mother = binary_tree[mother].right_child  # Child of mother is mother now
+                # terminate for root value
+                if index == 0:
+                    break
+            break
+        elif index == 5:
+            print("Unable to add data")
+
+
+def display():
+    for i in range(6):
+        print(binary_tree[i].left_child, binary_tree[i].data, binary_tree[i].right_child)
+    input()
+
+
+def inorder(index):
+    if binary_tree[index].data is not None:
+        inorder(binary_tree[index].left_child)
+        print(binary_tree[index].data, end=" ")
+        inorder(binary_tree[index].right_child)
+
+
+def preorder(index):
+    if binary_tree[index].data is not None:
+        print(binary_tree[index].data, end=" ")
+        preorder(binary_tree[index].left_child)
+        preorder(binary_tree[index].right_child)
+
+
+def postorder(index):  # Also known as RPN
+    if binary_tree[index].data is not None:
+        postorder(binary_tree[index].left_child)
+        postorder(binary_tree[index].right_child)
+        print(binary_tree[index].data, end=" ")
+
+
+def search(item):
+    for count in range(6):
+        if binary_tree[count].data == item:
+            return True
+    return False
+
+
+def main():
+    c = "n"
+    while c != "8":
+        print("""Choice 1: Initialise binary tree
+Choice 2: Add item to binary tree
+Choice 3: Display binary tree
+Choice 4: Traverse inorder
+Choice 5: Traverse preorder
+Choice 6: Traverse postorder
+Choice 7: Search item
+Choice 8: Quit
+        """)
+        c = input("Enter choice: ")
+        print(" ")
+        if c == "1":
+            init()
+        elif c == "2":
+            x = input("Enter data to be inserted: ")
+            try:
+                x = int(x)
+                add(x)
+            except:
+                print("ERROR! Enter a valid integer")
+        elif c == "3":
+            display()
+        elif c == "4":
+            inorder(0)
+            input("")
+        elif c == "5":
+            preorder(0)
+            input("")
+        elif c == "6":
+            postorder(0)
+            input("")
+        elif c == "7":
+            x = input("Enter data to be searched: ")
+            try:
+                x = int(x)
+                print(search(x))
+            except:
+                print("ERROR! Enter a valid integer")
+        elif c == "8":
+            break
+        else:
+            print("ERROR! Enter a valid choice")
+        print("")
+
+
+main()
