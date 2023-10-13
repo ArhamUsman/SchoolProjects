@@ -16,6 +16,7 @@ def add(value):
     if free == 0:
         data[free] = value
         free += 1
+        print("Data added successfully")
     elif free == len(data):
         print("Stack Overflow! ")
     else:
@@ -36,6 +37,7 @@ def add(value):
         else:
             right_pointer[prevPointer] = free
         free += 1
+        print("Data added successfully")
 
 
 def inorder(currPointer):
@@ -61,7 +63,7 @@ def postorder(currPointer):
 
 def search(value):
     currPointer = 0
-    while currPointer != 0:
+    while currPointer != -1:
         if value == data[currPointer]:
             return currPointer
         elif value < data[currPointer]:
