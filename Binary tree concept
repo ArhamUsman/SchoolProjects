@@ -1,0 +1,52 @@
+- 3 1D-Arrays: left_pointer, right_pointer, data
+- "free" variable indicates position of next node
+
+- to initialise, use for loop and intialise all the three arrays
+
+- to add a value:
+   -> if free = len(array): print overflow
+   -> elif free == 0: data[free] = value, free +=1
+   -> else:
+          data[free] = value
+          currNode = 0
+          prevNode = 0
+          direction = ""
+          while currNode != -1:
+              prevNode = currNode
+              if value < data[currNode]:
+                  currNode = left_pointer[currNode]
+                  direction = "l"
+              else:
+                  currNode = right_pointer[currNode]
+                  direction = "r"
+          if direction = "l":
+              left_pointer[prevNode] = free
+          else:
+              right_pointer[preNode] = free
+          free += 1
+   -> WORKING
+         free:              currNode:           prevNode:                  direction:
+         tells where new    identify the        preserve value of          tell whether
+         item is added      position of free    currNode when it           to add free to
+                            node in BT          becomes -1 indicating      rp or lp
+                                                free position is found
+
+- traversal:
+   -> def inorder(root):
+          currNode = 0
+          while currNode!= -1:
+              inorder(left_pointer[root])
+              print(data[root])
+              inorder(right_pointer[root])
+
+- search:
+   -> def search(value):
+          currNode = 0
+          while currNode!= -1:
+              if data[currNode] == value:
+                  return currNode
+              elif value < data[currNode]:
+                  currNode = left_pointer[currNode]
+              else:
+                  currNode = right_pointer[currNode]
+          return -1
