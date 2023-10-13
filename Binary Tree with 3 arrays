@@ -109,4 +109,3 @@ while c != "8":
     else:
         print("Enter a valid choice")
     print("")
-
