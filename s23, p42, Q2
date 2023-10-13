@@ -1,0 +1,82 @@
+# Part a: Declare record structure
+class SaleData:
+    def __init__(self):
+        self.ID = ""
+        self.quantity = -1
+
+
+# Part b: Declare and initialise pointers and variables
+
+# Declare
+CircularQueue = [SaleData() for i in range(5)]
+head = -1
+tail = -1
+NumberOfItems = -1
+# Initialise
+for i in range(5):
+    CircularQueue[i].ID = ""
+    CircularQueue[i].quantity = -1
+head = 0
+tail = 0
+NumberOfItems = 0
+
+
+# Part c: Declare function Enqueue
+def Enqueue(new_record):
+    global tail, head, CircularQueue, NumberOfItems
+    if NumberOfItems == 5:
+        return -1
+    else:
+        CircularQueue[tail].ID = new_record.ID
+        CircularQueue[tail].quantity = new_record.quantity
+        if tail == 4:
+            tail = 0
+        else:
+            tail += 1
+        NumberOfItems += 1
+        return 1
+
+
+# Part d: Declare function dequeue
+def Dequeue():
+    global NumberOfItems, CircularQueue, head
+    temp = SaleData()
+    if NumberOfItems == 0:
+        temp.ID = ""
+        temp.quantity = -1
+    else:
+        temp.ID = CircularQueue[head].ID
+        temp.quantity = CircularQueue[head].quantity
+        CircularQueue[head].ID = ""
+        CircularQueue[head].quantity = -1
+        head += 1
+        NumberOfItems -= 1
+    return temp
+
+
+# Part e: Declare procedure EnterRecord
+def EnterRecord():
+    y = SaleData()
+    z = input("Enter ID: ")
+    y.ID = z
+    y.quantity = input("Enter quantity: ")
+    z = Enqueue(y)
+    if z == 1:
+        print("Stored")
+    else:
+        print("Full")
+
+
+# Part f: Main Menu
+for i in range(6):
+    EnterRecord()
+
+x = SaleData()
+x = Dequeue()
+print("ID of dequeued item: ", x.ID)
+
+EnterRecord()
+
+print("")
+for i in range(5):
+    print("ID: ", CircularQueue[i].ID, " Quantity: ", CircularQueue[i].quantity)
