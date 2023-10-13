@@ -1,0 +1,111 @@
+left_pointer = [-1 for i in range(10)]
+data = ["" for i in range(10)]
+right_pointer = [-1 for i in range(10)]
+free = 0
+
+
+def init():
+    for i in range(10):
+        left_pointer[i] = -1
+        data[i] = ""
+        right_pointer[i] = -1
+
+
+def add(value):
+    global free
+    if free == 0:
+        data[free] = value
+        free += 1
+    elif free == len(data):
+        print("Stack Overflow! ")
+    else:
+        currPointer = 0
+        prevPointer = 0
+        direction = ""
+        data[free] = value
+        while currPointer != -1:
+            prevPointer = currPointer
+            if value < data[currPointer]:
+                currPointer = left_pointer[currPointer]
+                direction = "L"
+            else:
+                currPointer = right_pointer[currPointer]
+                direction = "R"
+        if direction == "L":
+            left_pointer[prevPointer] = free
+        else:
+            right_pointer[prevPointer] = free
+        free += 1
+
+
+def inorder(currPointer):
+    if currPointer != -1:
+        inorder(left_pointer[currPointer])
+        print(data[currPointer], end=" ")
+        inorder(right_pointer[currPointer])
+
+
+def preorder(currPointer):
+    if currPointer != -1:
+        print(data[currPointer], end=" ")
+        preorder(left_pointer[currPointer])
+        preorder(right_pointer[currPointer])
+
+
+def postorder(currPointer):
+    if currPointer != -1:
+        postorder(left_pointer[currPointer])
+        postorder(right_pointer[currPointer])
+        print(data[currPointer], end=" ")
+
+
+def search(value):
+    currPointer = 0
+    while currPointer != 0:
+        if value == data[currPointer]:
+            return currPointer
+        elif value < data[currPointer]:
+            currPointer = left_pointer[currPointer]
+        else:
+            currPointer = right_pointer[currPointer]
+    return -1
+
+
+def display():
+    for i in range(10):
+        print(left_pointer[i], " ", data[i], " ", right_pointer[i])
+
+c = ""
+while c != "8":
+    print("Choice 1: Initialise BT \nChoice 2: Add item \nChoice 3: Display \nChoice 4: Inorder Traverse \nChoice 5: "
+          "Preorder Traverse \nChoice 6: Postorder Traverse \nChoice 7: Search \nChoice 8: Quit \n ")
+    c = input("Enter Choice: ")
+    print("")
+    if c == "1":
+        init()
+    elif c == "2":
+        x = input("Enter data: ")
+        add(x)
+    elif c == "3":
+        display()
+    elif c == "4":
+        inorder(0)
+        print("")
+    elif c == "5":
+        preorder(0)
+        print("")
+    elif c == "6":
+        postorder(0)
+        print("")
+    elif c == "7":
+        x = input("Enter value to be searched: ")
+        x = search(x)
+        if x == -1:
+            print("Value not found")
+        else:
+            print("Value found at: ", x)
+    elif c == "8":
+        break
+    else:
+        print("Enter a valid choice")
+    print("")
