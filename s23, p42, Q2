@@ -1,82 +1,72 @@
-# Part a: Declare record structure
+# Part a
 class SaleData:
     def __init__(self):
-        self.ID = ""
+        self.id = ""
         self.quantity = -1
 
 
-# Part b: Declare and initialise pointers and variables
-
-# Declare
+# Part b
 CircularQueue = [SaleData() for i in range(5)]
-head = -1
-tail = -1
-NumberOfItems = -1
-# Initialise
+# Head and Tail are integers
+# NumberOfItems is an integer
 for i in range(5):
-    CircularQueue[i].ID = ""
+    CircularQueue[i].id = ""
     CircularQueue[i].quantity = -1
-head = 0
-tail = 0
+Head = 0
+Tail = 0
 NumberOfItems = 0
 
 
-# Part c: Declare function Enqueue
+# Part c
 def Enqueue(new_record):
-    global tail, head, CircularQueue, NumberOfItems
-    if NumberOfItems == 5:
+    global Tail, NumberOfItems
+    if NumberOfItems == len(CircularQueue):
         return -1
     else:
-        CircularQueue[tail].ID = new_record.ID
-        CircularQueue[tail].quantity = new_record.quantity
-        if tail == 4:
-            tail = 0
+        CircularQueue[Tail] = new_record
+        if Tail == len(CircularQueue) - 1:
+            Tail = 0
         else:
-            tail += 1
+            Tail += 1
         NumberOfItems += 1
         return 1
 
 
-# Part d: Declare function dequeue
+# Part d
 def Dequeue():
-    global NumberOfItems, CircularQueue, head
-    temp = SaleData()
+    global Head, NumberOfItems
+    x = SaleData()
     if NumberOfItems == 0:
-        temp.ID = ""
-        temp.quantity = -1
+        x.id = ""
+        x.quantity = -1
     else:
-        temp.ID = CircularQueue[head].ID
-        temp.quantity = CircularQueue[head].quantity
-        CircularQueue[head].ID = ""
-        CircularQueue[head].quantity = -1
-        head += 1
+        x = CircularQueue[Head]
+        if Head == len(CircularQueue) - 1:
+            Head = 0
+        else:
+            Head += 1
         NumberOfItems -= 1
-    return temp
+    return x
 
 
-# Part e: Declare procedure EnterRecord
+# Part e
 def EnterRecord():
-    y = SaleData()
-    z = input("Enter ID: ")
-    y.ID = z
-    y.quantity = input("Enter quantity: ")
-    z = Enqueue(y)
-    if z == 1:
-        print("Stored")
-    else:
+    z = SaleData()
+    z.id = input("Enter id: ")
+    z.quantity = int(input("Enter Quantity: "))
+    y = Enqueue(z)
+    if y == -1:
         print("Full")
+    else:
+        print("Stored")
 
 
-# Part f: Main Menu
+# Part f
 for i in range(6):
     EnterRecord()
 
-x = SaleData()
-x = Dequeue()
-print("ID of dequeued item: ", x.ID)
-
+j = Dequeue()
+print(j.id, j.quantity)
 EnterRecord()
-
-print("")
 for i in range(5):
-    print("ID: ", CircularQueue[i].ID, " Quantity: ", CircularQueue[i].quantity)
+    print(CircularQueue[i].id, "\t", CircularQueue[i].quantity)
