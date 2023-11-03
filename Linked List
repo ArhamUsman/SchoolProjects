@@ -1,0 +1,59 @@
+class Node:
+    def __init__(self):
+        self.data = "."
+        self.next = -1
+
+
+header = -1
+free = 0
+link_list = [Node() for i in range(5)]
+
+
+def initialise_list():
+    global header, free
+    header = -1
+    free = 0
+    for i in range(len(link_list)):
+        link_list[i].data = "."
+        if i == len(link_list) - 1:
+            link_list[i].next = -1
+        else:
+            link_list[i].next = i + 1
+
+
+def add(value):
+    global header, free
+    if free == -1:
+        return
+
+    link_list[free].data = value
+    free_clone = free
+    free = link_list[free].next
+
+    curr = header
+    while value > link_list[link_list[curr].next].data and link_list[curr].next != -1:
+        curr = link_list[curr].next
+    if curr == header:
+        link_list[free_clone].next = header
+        header = free_clone
+    else:
+        link_list[free_clone].next = link_list[curr].next
+        link_list[curr].next = free_clone
+
+
+def display_list():
+    for i in range(len(link_list)):
+        if i == header:
+            print("head -> ", link_list[i].data, "\t", link_list[i].next)
+        elif i == free:
+            print("tail -> ", link_list[i].data, "\t", link_list[i].next)
+        else:
+            print("\t\t", link_list[i].data, "\t", link_list[i].next)
+
+
+initialise_list()
+add("E")
+add("B")
+add("J")
+add("G")
+display_list()
